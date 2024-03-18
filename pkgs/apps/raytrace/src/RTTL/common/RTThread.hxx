@@ -7,6 +7,9 @@
 
 #if !defined(_WIN32)
 
+#include "atomic/atomic.h"
+#include <stdint.h>
+
 typedef volatile int atomic_t;
 
 #if defined(__sparc__) || defined(__sparc) || defined(sparc) || defined(__SPARC__)
@@ -32,14 +35,15 @@ _INLINE int atomic_add(atomic_t *v, const int c) {
 }
 #else
 _INLINE int atomic_add(atomic_t *v, const int c) {
-  int i = c;
-  int __i = i;
-  __asm__ __volatile__(
-                       "lock ; xaddl %0, %1;"
-                       :"=r"(i)
-                        :"m"(*v), "0"(i));
 
-  return i + __i;
+				int rv,flag;
+				do {
+								register int temp_v = *v;
+								rv = temp_v + c;
+								flag=atomic_cmpset_32(v, temp_v, rv); 
+				} while(!flag);
+				return rv;
+
 }
 #endif
 
