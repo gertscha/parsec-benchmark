@@ -61,7 +61,7 @@ vis="no"
 shared="no"
 
 CC="${CC-gcc}"
-CFLAGS="$CFLAGS -Wall -I."
+CFLAGS="$CFLAGS -Wall -I. -fno-aggressive-loop-optimizations"
 LDFLAGS="$LDFLAGS"
 HAVE_GETOPT_LONG=1
 
