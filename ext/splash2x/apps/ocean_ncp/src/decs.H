@@ -14,6 +14,8 @@
 /*                                                                       */
 /*************************************************************************/
 
+#include <stdint.h>
+
 #define INPROCS      1024
 #define MAX_LEVELS     14
 // 32bit
@@ -23,15 +25,15 @@
 // decs.H:100:11: error: size of array ‘q_multi’ is too large                                               
 //   double q_multi[MAX_LEVELS][IMAX][JMAX];
 //
-// Furthermore, the arrays are of type long and double,
-// so the calculations here are just off and have never been tested?
-//
 // https://stackoverflow.com/questions/42574890/why-is-the-maximum-size-of-an-array-too-large
 //
-#if PTRDIFF_MAX < (1 << 30)
+// replaced "#if PTRDIFF_MAX < (1 << 30)" based on https://stackoverflow.com/a/5273354
+#if UINTPTR_MAX == 0xffffffff
+/* 32-bit */
 #define IMAX         2050
 #define JMAX         2050
 #else
+/* 64-bit */
 #define IMAX         8098
 #define JMAX         8098
 #endif
