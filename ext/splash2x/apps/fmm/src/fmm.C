@@ -319,17 +319,18 @@ void
 GetArguments ()
 {
    char *input;
+   int maxlen = MAX_LINE_SIZE * sizeof(char);
 
-   input = (char *) malloc(MAX_LINE_SIZE * sizeof(char));
+   input = (char *) malloc(maxlen);
    if (input == NULL) {
       fprintf(stderr, "ERROR\n");
       exit(-1);
    }
-   gets(input);
-   if (strcmp(input, "one cluster") == 0)
+   fgets(input, maxlen, stdin);
+   if (strncmp(input, "one cluster\n", 12) == 0)
       Cluster = ONE_CLUSTER;
    else {
-      if ((*input == '\0') || (strcmp(input, "two cluster") == 0))
+      if ((*input == '\0') || (strncmp(input, "two cluster\n", 12) == 0))
 	 Cluster = TWO_CLUSTER;
       else {
 	 fprintf(stderr, "ERROR: The only cluster types available are ");
@@ -339,11 +340,11 @@ GetArguments ()
       }
    }
 
-   gets(input);
-   if (strcmp(input, "uniform") == 0)
+   fgets(input, maxlen, stdin);
+   if (strncmp(input, "uniform\n", 8) == 0)
       Model = UNIFORM;
    else {
-      if ((*input == '\0') || (strcmp(input, "plummer") == 0))
+      if ((*input == '\0') || (strncmp(input, "plummer\n", 8) == 0))
 	 Model = PLUMMER;
       else {
 	 fprintf(stderr, "ERROR: The only distributions available are ");
@@ -353,7 +354,7 @@ GetArguments ()
       }
    }
 
-   Total_Particles = atoi(gets(input));
+   Total_Particles = atoi(fgets(input, maxlen, stdin));
    if (Total_Particles <= 0) {
       fprintf(stderr, "ERROR: The number of particles should be an int ");
       fprintf(stderr, "greater than 0.\n");
@@ -361,7 +362,7 @@ GetArguments ()
       exit(-1);
    }
 
-   Precision = atof(gets(input));
+   Precision = atof(fgets(input, maxlen, stdin));
    if (Precision == 0.0) {
       fprintf(stderr, "ERROR: The precision has no default value.\n");
       fprintf(stderr, "If you need help, type \"nbody -help\".\n");
@@ -376,7 +377,7 @@ GetArguments ()
       exit(-1);
    }
 
-   Number_Of_Processors = atoi(gets(input));
+   Number_Of_Processors = atoi(fgets(input, maxlen, stdin));
    if (Number_Of_Processors == 0) {
       fprintf(stderr, "ERROR: The Number_Of_Processors has no default.\n");
       fprintf(stderr, "If you need help, type \"nbody -help\".\n");
@@ -389,7 +390,7 @@ GetArguments ()
       exit(-1);
    }
 
-   Time_Steps = atoi(gets(input));
+   Time_Steps = atoi(fgets(input, maxlen, stdin));
    if (Time_Steps == 0) {
       fprintf(stderr, "ERROR: The number of time steps has no default.\n");
       fprintf(stderr, "If you need help, type \"nbody -help\".\n");
@@ -402,7 +403,7 @@ GetArguments ()
       exit(-1);
    }
 
-   Timestep_Dur = atof(gets(input));
+   Timestep_Dur = atof(fgets(input, maxlen, stdin));
    if (Timestep_Dur == 0.0) {
       fprintf(stderr, "ERROR: The duration of a time step has no default ");
       fprintf(stderr, "value.\n If you need help, type \"nbody -help\".\n");
@@ -415,7 +416,7 @@ GetArguments ()
       exit(-1);
    }
 
-   Softening_Param = atof(gets(input));
+   Softening_Param = atof(fgets(input, maxlen, stdin));
    if (Softening_Param == 0.0)
       Softening_Param = MIN_REAL;
    if (Softening_Param < 0) {
@@ -425,11 +426,11 @@ GetArguments ()
       exit(-1);
    }
 
-   gets(input);
-   if ((*input == '\0') || (strcmp(input, "cost zones") == 0))
+   fgets(input, maxlen, stdin);
+   if ((*input == '\0') || (strncmp(input, "cost zones\n", 11) == 0))
       Partition_Flag = COST_ZONES;
    else {
-      if (strcmp(input, "orb") == 0)
+      if (strncmp(input, "orb\n", 4) == 0)
 	 Partition_Flag = ORB;
       else {
 	 fprintf(stderr, "ERROR: The only partitioning schemes available ");
