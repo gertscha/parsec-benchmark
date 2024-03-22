@@ -127,10 +127,8 @@ int main(int argc, char *argv[])
    double min_frac;
    double max_frac;
    double avg_frac;
-   extern char *optarg;
    long ch;
    unsigned long start;
-   double *tmp_ptr;
 
    CLOCK(start)
 
