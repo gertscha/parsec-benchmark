@@ -12,7 +12,7 @@ obj
 run
 
 # info
-/pkgs/libs/gsl/src/doc/gsl-ref.info*
+/pkgs/libs/gsl/src/doc/*
 /pkgs/tools/libtool/src/doc/libtool.info*
 
 # libtool doc timestap
