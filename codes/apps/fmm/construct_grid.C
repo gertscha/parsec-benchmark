@@ -884,10 +884,9 @@ SetColleagues (long my_id, box *b)
    if (pb != NULL) {
       for (i = 0; i < b->num_siblings; i++)
 	 b->colleagues[b->num_colleagues++] = b->siblings[i];
-      while (b->construct_synch == 0) {
-	 /* wait */;
-      }
-      b->construct_synch = 0;
+
+      sem_wait(&b->construct_synch);
+
       for (i = 0; i < pb->num_colleagues; i++) {
 	 cb = pb->colleagues[i];
 	 for (j = 0; j < NUM_OFFSPRING; j++) {
@@ -902,7 +901,7 @@ SetColleagues (long my_id, box *b)
    if (b->type == PARENT) {
       for (i = 0; i < NUM_OFFSPRING; i++) {
 	 if (b->children[i] != NULL) {
-	    b->children[i]->construct_synch = 1;
+	    sem_post(&b->children[i]->construct_synch);
 	 }
       }
    }

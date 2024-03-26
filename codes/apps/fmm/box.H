@@ -19,6 +19,7 @@
 
 #include "defs.h"
 #include "particle.h"
+#include "semaphore.h"
 
 /* This definition sets the maximum number of particles allowed per box. */
 #define MAX_PARTICLES_PER_BOX 40
@@ -95,7 +96,7 @@ struct _Box
   complex x_expansion[MAX_EXPANSION_TERMS];
   long exp_lock_index;
   long particle_lock_index;
-  volatile long construct_synch;
+  sem_t construct_synch;
   volatile long interaction_synch;
   long proc;
   long cost;

@@ -95,7 +95,7 @@ ZeroBox (long my_id, box *b)
       b->shadow[i] = NULL;
    }
    b->num_children = 0;
-   b->construct_synch = 0;
+   sem_destroy(&b->construct_synch);
    b->interaction_synch = 0;
    b->cost = 0;
    b->proc = my_id;
@@ -132,6 +132,8 @@ InitBox (long my_id, real x_center, real y_center, real length, box *parent)
    b = &Local[my_id].B_Heap[Local[my_id].Index_B_Heap++];
    b->x_center = x_center;
    b->y_center = y_center;
+   sem_init(&b->construct_synch, 0, 0);
+   b->interaction_synch = 0;
    b->length = length;
    b->parent = parent;
    if (parent == NULL)
