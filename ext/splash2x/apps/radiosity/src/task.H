@@ -40,7 +40,7 @@ per-process data structures */
 
 /*** Controling parallelism ***/
 
-#define MAX_TASKGET_RETRY (32)	    /* Max # of retry get_task() can make */
+#define MAX_TASKGET_RETRY (48)	    /* Max # of retry get_task() can make */
 #define N_ALLOCATE_LOCAL_TASK (8)   /* get_task() and free_task() transfer
 this # of task objects to/from the
 global shared queue at a time */
