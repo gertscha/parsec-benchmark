@@ -163,7 +163,7 @@ static void print_stats(stats_t *s) {
 
   //determine most suitable unit to use
   for(unit_idx=0; unit_idx<unit_str_size; unit_idx++) {
-    unsigned int unit_div_next = unit_div * 1024;
+    size_t unit_div_next = unit_div * 1024;
 
     if(s->total_input / unit_div_next <= 0) break;
     if(s->total_dedup / unit_div_next <= 0) break;
