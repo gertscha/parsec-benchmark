@@ -16,5 +16,4 @@
 run_exec="bin/dedup"
 
 # Arguments to use
-run_args="-c -p -v -t ${NTHREADS} -i FC-6-x86_64-disc1.iso -o output.dat.ddp"
-
+run_args="-c -p -v -t ${NTHREADS} -i FC-6-x86_64-disc1-2.iso -o output.dat.ddp"

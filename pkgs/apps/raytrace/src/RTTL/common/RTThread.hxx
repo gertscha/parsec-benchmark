@@ -250,13 +250,9 @@ public:
     pthread_cond_init(&m_cond, NULL);
   }
   ~MultiThreadedSyncPrimitive() {
-    if (pthread_mutex_destroy(&m_mutex) != 0) {
-      perror("RTThread.hxx, failed to destroy pthread_mutex");
-    }
+    pthread_mutex_destroy(&m_mutex);
     pthread_cond_broadcast(&m_cond);
-    if (pthread_cond_destroy(&m_cond) != 0) {
-      perror("RTThread.hxx, failed to destroy pthread_cond");
-    }
+    pthread_cond_destroy(&m_cond);
   }
 
   // http://node1.yo-linux.com/cgi-bin/man2html?cgi_command=pthread_mutex_lock

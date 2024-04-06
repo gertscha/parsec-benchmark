@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
                   exit(-1);
                 }
                 break;
-      case 'n': num_keys = atoi(optarg);
+      case 'n': num_keys = strtol(optarg, NULL, 10);
                 if (num_keys < 1) {
                   printerr("Number of keys must be >= 1\n");
                   exit(-1);

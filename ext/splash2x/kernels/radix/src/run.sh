@@ -47,7 +47,7 @@ case "${INPUTSIZE}" in
 "simlarge"	) 
 	PROGARGS="-p${NUMPROCS} -r4096 -n67108864 -m2147483647";;
 "native"	) 
-	PROGARGS="-p${NUMPROCS} -r4096 -n268435456 -m2147483647";;
+	PROGARGS="-p${NUMPROCS} -r4096 -n1073741824 -m2147483647";;
 *)  
 	echo "Input size error"
 	exit 1;;
