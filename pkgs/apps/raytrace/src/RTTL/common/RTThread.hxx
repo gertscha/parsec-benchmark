@@ -251,7 +251,10 @@ public:
   }
   ~MultiThreadedSyncPrimitive() {
     pthread_mutex_destroy(&m_mutex);
-    pthread_cond_broadcast(&m_cond);
+    // pthread_cond_destroy fails to terminate
+    // doing a pthread_cond_broadcast allows termination but causes a segmentation fault
+    // manually setting the wrefs to zero works for now
+    m_cond.__data.__wrefs = 0;
     pthread_cond_destroy(&m_cond);
   }
 
