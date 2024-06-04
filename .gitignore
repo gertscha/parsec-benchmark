@@ -23,3 +23,6 @@ run
 /bin/.#parsecmgmt.1.6
 /toolkit/hpt/loggroup1.old/
 /toolkit/hpt/loggroup2.old/
+
+# autogen
+/pkgs/libs/glib/src/po/*.gmo
