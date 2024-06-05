@@ -26,3 +26,4 @@ run
 
 # autogen
 /pkgs/libs/glib/src/po/*.gmo
+/pkgs/apps/vips/src/po/*.gmo
